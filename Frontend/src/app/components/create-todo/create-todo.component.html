@@ -1,0 +1,38 @@
+<div class="card p-3 my-4 text-align-start">
+  <h4>Add Item</h4>
+  <div class="d-flex gap-3 add-item" [formGroup]="form">
+    <input
+      placeholder="Enter description..."
+      type="text"
+      id="formAddTodoItem"
+      class="form-control"
+      value=""
+      formControlName="description"
+    />
+    <button
+      (click)="onClear()"
+      type="button"
+      class="btn btn-secondary"
+      [disabled]="!this.form.get('description')?.value"
+    >
+      Clear
+    </button>
+    <button
+      (click)="onAddItem()"
+      type="button"
+      class="btn btn-primary"
+      [disabled]="this.form.invalid"
+    >
+      Add Item
+    </button>
+  </div>
+  <div
+    *ngIf="form.get('description')?.getError('disallowedValue') as error"
+    class="invalid-feedback d-block mt-3"
+  >
+    Description cannot be:
+    <span class="fw-bold">
+      {{ error }}
+    </span>
+  </div>
+</div>

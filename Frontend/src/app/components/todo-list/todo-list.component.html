@@ -1,0 +1,40 @@
+<ng-container *ngIf="todoList?.length; else empty">
+  <div class="d-flex justify-content-between">
+    <h3 class="text-muted">
+      {{ incompleteItemsCount }} item{{ incompleteItemsCount === 1 ? "" : "s" }}
+      todo
+    </h3>
+    <h3 class="text-muted">
+      {{ completeItemsCount }} item{{ completeItemsCount === 1 ? "" : "s" }}
+      completed
+    </h3>
+  </div>
+
+  <div class="card mb-3" *ngFor="let todo of todoList">
+    <div class="p-3 gap-3 d-flex justify-content-between align-items-end">
+      <div class="d-flex flex-column">
+        <div *ngIf="todo.isCompleted">
+          <span class="badge rounded-pill text-bg-success mb-2">
+            Completed
+          </span>
+        </div>
+        <h4>
+          {{ todo.description }}
+        </h4>
+      </div>
+      <div>
+        <button (click)="onMarkComplete(todo)" class="btn btn-light">
+          Mark Complete
+        </button>
+        <button (click)="onDelete(todo.id)" class="btn btn-light ms-3">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #empty>
+  <h3 class="text-center mt-4 pt-4 text-muted">
+    Create your first todo to get started
+  </h3>
+</ng-template>
